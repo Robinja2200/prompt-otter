@@ -1,0 +1,20 @@
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor files
+.vscode/
+.idea/
+
+# Temporary / backup files
+*.tmp
+*.bak
+*.old
+*.orig
+*~
+
+# Generated archives / export files
+*.zip
+*.rar
+*.7z
