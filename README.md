@@ -1,3 +1,9 @@
+## Install (instructions below)
+
+Install from Greasy Fork:
+
+https://greasyfork.org/en/scripts/580189-prompt-otter
+
 # Prompt Otter
 
 **Prompt Otter** is a local userscript that makes long ChatGPT conversations easier to navigate. It highlights your prompts, builds a searchable prompt list, and can load prompts across long virtualized chats so you can jump back to the right part of a conversation faster.
@@ -25,8 +31,6 @@ Prompt Otter is designed for ChatGPT on:
 ## Installation
 
 ### Recommended: Greasy Fork
-
-Once Prompt Otter is published on Greasy Fork:
 
 1. Install a userscript manager such as Tampermonkey, Violentmonkey, or Greasemonkey.
 2. Open the Prompt Otter page on Greasy Fork.
