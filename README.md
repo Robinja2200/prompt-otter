@@ -1,4 +1,4 @@
-<img src="assets/logo.png" alt="Prompt Otter logo" width="72" align="right">
+<img src="assets/prompt-otter-logo-nobg.png" alt="Prompt Otter logo" width="72" align="right">
 
 
 ## Install from Greasy Fork (instructions below):
@@ -71,6 +71,8 @@ Prompt Otter is designed for ChatGPT on:
 
 ## Controls
 
+![Prompt Otter Load all button](screenshots/prompt-otter-expanded-detailed.png)
+
 | Control | Action |
 |---|---|
 | **Load all** | Fast scan through the conversation and cache prompts |
@@ -83,10 +85,6 @@ Prompt Otter is designed for ChatGPT on:
 | **Clear prompt cache** | Clear cached prompts and rebuild from visible prompts |
 | **Reset window** | Reset panel size and position |
 | **Hide navigator** | Hide the panel until restored |
-
-### Controls
-
-![Prompt Otter Load all button](screenshots/prompt-otter-expanded-detailed.png)
 
 ## Keyboard shortcuts
 
