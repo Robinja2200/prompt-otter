@@ -1,10 +1,5 @@
 <img src="assets/prompt-otter-logo-nobg.png" alt="Prompt Otter logo" width="72" align="right">
 
-
-## Install from Greasy Fork (instructions below):
-
-https://greasyfork.org/en/scripts/580189-prompt-otter
-
 # Prompt Otter
 
 **Prompt Otter** is a local userscript that makes long ChatGPT conversations easier to navigate. It highlights your prompts, builds a searchable prompt list, and can load prompts across long virtualized chats so you can jump back to the right part of a conversation faster.
@@ -15,6 +10,9 @@ Prompt Otter is designed for ChatGPT on:
 - `https://www.chatgpt.com/*`
 - `https://chat.openai.com/*`
 
+## Install from Greasy Fork (instructions below):
+
+https://greasyfork.org/en/scripts/580189-prompt-otter
 ## Features
 
 - Highlight your prompts inside ChatGPT conversations
