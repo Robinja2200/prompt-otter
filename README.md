@@ -1,4 +1,4 @@
-<img src="assets/prompt-otter-logo-nobg.png" alt="Prompt Otter logo" width="72" align="right">
+<img src="assets/prompt-otter-logo-nobg.png" alt="Prompt Otter logo" width="100" align="right">
 
 # Prompt Otter
 
@@ -37,6 +37,7 @@ https://greasyfork.org/en/scripts/580189-prompt-otter
 4. Confirm the install in your userscript manager.
 5. Open or reload ChatGPT.
 
+
 ### Manual install from GitHub
 
 1. Install a userscript manager:
@@ -48,6 +49,20 @@ https://greasyfork.org/en/scripts/580189-prompt-otter
 4. Your userscript manager should detect the script.
 5. Confirm installation.
 6. Open or reload ChatGPT.
+
+### Chrome Web Store version
+
+A Chrome Web Store version is planned/available as a Manifest V3 extension.
+
+The Chrome extension version uses the same local-only Prompt Otter logic, but it is packaged as a native Chrome extension instead of a userscript.
+
+Development package:
+
+- `chrome-extension/manifest.json`
+- `chrome-extension/content.js`
+- `chrome-extension/icons/`
+
+The Chrome extension does not use analytics, accounts, API keys, remote code, or external services.
 
 ## Usage
 
