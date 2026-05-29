@@ -75,16 +75,16 @@ The Chrome extension does not use analytics, accounts, API keys, remote code, or
 
 ### Expanded mode
 
-![Prompt Otter expanded panel](screenshots/prompt-otter-expanded.png)
+![Prompt Otter expanded panel](store-assets/screenshot-1-expanded.png)
 
-### Collapsed mode
+### Search mode
 
-![Prompt Otter collapsed panel](screenshots/prompt-otter-collapsed.png)
+![Prompt Otter collapsed panel](store-assets/screenshot-2-search.png)
 
 
-## Controls
+## Collapsed mode & Controls
 
-![Prompt Otter Load all button](screenshots/prompt-otter-expanded-detailed.png)
+![Prompt Otter Load all button](store-assets/screenshot-3-options.png)
 
 | Control | Action |
 |---|---|
