@@ -32,7 +32,7 @@ https://chromewebstore.google.com/detail/prompt-otter/bpnjpbkbmnjfcpiencjcinegcj
 
 ### Firefox Add-ons
 
-Firefox Add-ons publishing is prepared through the release tooling in this repository. See [Release and Store Publishing](RELEASE.md) for first-publish setup and the tag-based release routine.
+Coming soon
 
 ### Greasy Fork
 
