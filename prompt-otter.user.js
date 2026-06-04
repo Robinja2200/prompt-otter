@@ -522,12 +522,6 @@
     panel.classList.toggle('gpn-loading-v2', state.loadAllRunning);
   }
 
-  function escapeHtml(value) {
-    return String(value).replace(/[&<>"']/g, ch => ({
-      '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;',
-    }[ch]));
-  }
-
   function cssEscape(value) {
     if (window.CSS?.escape) return CSS.escape(value);
     return String(value).replace(/["\\]/g, '\\$&');
@@ -995,69 +989,138 @@
     panel.classList.toggle('gpn-menu-open-v2', state.menuOpen);
     panel.classList.toggle('gpn-loading-v2', state.loadAllRunning);
 
-    const listHtml = rows.length
-      ? rows.map(({ record, index }) => `
-          <button type="button" class="gpn-row ${record.key === state.activeKey ? 'gpn-selected' : ''}" data-gpn-key="${escapeHtml(record.key)}" title="Jump to prompt ${index + 1}">
-            <span class="gpn-num">#${index + 1}</span>
-            <span class="gpn-text">${escapeHtml(record.text)}</span>
-            <span class="gpn-status">${record.mounted ? 'loaded' : 'cached'}</span>
-          </button>
-        `).join('') + (tooMany ? `<div class="gpn-empty">Showing first ${CONFIG.maxRenderedRows} matches. Use search to narrow the list.</div>` : '')
-      : `<div class="gpn-empty">No cached prompts yet. Scroll manually or click Load all.</div>`;
-
-    panel.innerHTML = `
-      <div class="gpn-header">
-        <span class="gpn-drag" title="Drag to move">⋮⋮</span>
-        <span class="gpn-title">Prompts</span>
-        <button type="button" data-gpn-action="prev" title="Previous prompt: Alt+↑">↑</button>
-        <button type="button" data-gpn-action="next" title="Next prompt: Alt+↓">↓</button>
-        <span class="gpn-count">${activeText}</span>
-        <span class="gpn-spacer"></span>
-        <button type="button" class="gpn-tertiary gpn-load-label" data-gpn-action="${loadAction}" title="Fast load all cached prompts">${loadText}</button>
-        <button type="button" class="gpn-tertiary" data-gpn-action="refresh" title="Scan currently loaded prompts only">↻</button>
-        <span class="gpn-menu-wrap">
-          <button type="button" data-gpn-action="menu" aria-haspopup="true" aria-expanded="${state.menuOpen ? 'true' : 'false'}" title="More actions">⋯</button>
-          <span class="gpn-menu" role="menu">
-            <button type="button" data-gpn-action="${loadAction}">${state.loadAllRunning ? 'Stop load all' : 'Load all prompts'}</button>
-            <button type="button" data-gpn-action="${safeLoadAction}">${state.loadAllRunning ? 'Stop load all' : 'Safe load (slower)'}</button>
-            <button type="button" data-gpn-action="refresh">Refresh visible prompts</button>
-            <button type="button" data-gpn-action="copy">Copy current prompt</button>
-            <button type="button" data-gpn-action="clear-cache">Clear prompt cache</button>
-            <button type="button" data-gpn-action="reset">Reset window</button>
-            <button type="button" data-gpn-action="hide">Hide navigator</button>
-          </span>
-        </span>
-        <button type="button" data-gpn-action="toggle" title="Expand or collapse">${state.expanded ? 'Collapse' : 'Expand'}</button>
-        <button type="button" data-gpn-action="hide" title="Hide. Press Alt+P to show again.">×</button>
-      </div>
-
-      <div class="gpn-compact">
-        <div class="gpn-compact-label">Current prompt</div>
-        <div class="gpn-compact-text">${escapeHtml(activePrompt)}</div>
-      </div>
-
-      <div class="gpn-body">
-        <div class="gpn-search-row">
-          <input class="gpn-search" data-gpn-search type="search" placeholder="Search cached prompts…" value="${escapeHtml(state.query)}" />
-        </div>
-        <div class="gpn-list">${listHtml}</div>
-        <div class="gpn-footer">
-          <span class="gpn-notice">Load all uses fast mode. Use Safe load only if prompts are missing.</span>
-          <span class="gpn-footer-actions"><button type="button" data-gpn-action="${loadAction}">${loadText}</button></span>
-        </div>
-      </div>
-      ${resizeHandlesHtml()}
-    `;
+    panel.replaceChildren(
+      createHeader(activeText, loadAction, safeLoadAction, loadText),
+      createCompact(activePrompt),
+      createBody(rows, tooMany, loadAction, loadText),
+      ...createResizeHandles(),
+    );
 
     getRestoreTab().classList.toggle('gpn-visible-v2', state.hidden);
     applyPanelGeometry(panel);
     renderActiveOnly();
   }
 
-  function resizeHandlesHtml() {
+  function createHeader(activeText, loadAction, safeLoadAction, loadText) {
+    const menuWrap = el('span', { className: 'gpn-menu-wrap' }, [
+      button('menu', '⋯', {
+        'aria-haspopup': 'true',
+        'aria-expanded': state.menuOpen ? 'true' : 'false',
+        title: 'More actions',
+      }),
+      el('span', { className: 'gpn-menu', role: 'menu' }, [
+        button(loadAction, state.loadAllRunning ? 'Stop load all' : 'Load all prompts'),
+        button(safeLoadAction, state.loadAllRunning ? 'Stop load all' : 'Safe load (slower)'),
+        button('refresh', 'Refresh visible prompts'),
+        button('copy', 'Copy current prompt'),
+        button('clear-cache', 'Clear prompt cache'),
+        button('reset', 'Reset window'),
+        button('hide', 'Hide navigator'),
+      ]),
+    ]);
+
+    return el('div', { className: 'gpn-header' }, [
+      el('span', { className: 'gpn-drag', title: 'Drag to move' }, ['⋮⋮']),
+      el('span', { className: 'gpn-title' }, ['Prompts']),
+      button('prev', '↑', { title: 'Previous prompt: Alt+↑' }),
+      button('next', '↓', { title: 'Next prompt: Alt+↓' }),
+      el('span', { className: 'gpn-count' }, [activeText]),
+      el('span', { className: 'gpn-spacer' }),
+      button(loadAction, loadText, {
+        className: 'gpn-tertiary gpn-load-label',
+        title: 'Fast load all cached prompts',
+      }),
+      button('refresh', '↻', {
+        className: 'gpn-tertiary',
+        title: 'Scan currently loaded prompts only',
+      }),
+      menuWrap,
+      button('toggle', state.expanded ? 'Collapse' : 'Expand', { title: 'Expand or collapse' }),
+      button('hide', '×', { title: 'Hide. Press Alt+P to show again.' }),
+    ]);
+  }
+
+  function createCompact(activePrompt) {
+    return el('div', { className: 'gpn-compact' }, [
+      el('div', { className: 'gpn-compact-label' }, ['Current prompt']),
+      el('div', { className: 'gpn-compact-text' }, [activePrompt]),
+    ]);
+  }
+
+  function createBody(rows, tooMany, loadAction, loadText) {
+    const search = el('input', {
+      className: 'gpn-search',
+      'data-gpn-search': '',
+      type: 'search',
+      placeholder: 'Search cached prompts…',
+      value: state.query,
+    });
+    const list = el('div', { className: 'gpn-list' });
+
+    if (rows.length) {
+      rows.forEach(({ record, index }) => list.append(createRow(record, index)));
+      if (tooMany) {
+        list.append(el('div', { className: 'gpn-empty' }, [
+          `Showing first ${CONFIG.maxRenderedRows} matches. Use search to narrow the list.`,
+        ]));
+      }
+    } else {
+      list.append(el('div', { className: 'gpn-empty' }, ['No cached prompts yet. Scroll manually or click Load all.']));
+    }
+
+    return el('div', { className: 'gpn-body' }, [
+      el('div', { className: 'gpn-search-row' }, [search]),
+      list,
+      el('div', { className: 'gpn-footer' }, [
+        el('span', { className: 'gpn-notice' }, ['Load all uses fast mode. Use Safe load only if prompts are missing.']),
+        el('span', { className: 'gpn-footer-actions' }, [button(loadAction, loadText)]),
+      ]),
+    ]);
+  }
+
+  function createRow(record, index) {
+    return button(null, '', {
+      className: `gpn-row ${record.key === state.activeKey ? 'gpn-selected' : ''}`,
+      'data-gpn-key': record.key,
+      title: `Jump to prompt ${index + 1}`,
+    }, [
+      el('span', { className: 'gpn-num' }, [`#${index + 1}`]),
+      el('span', { className: 'gpn-text' }, [record.text]),
+      el('span', { className: 'gpn-status' }, [record.mounted ? 'loaded' : 'cached']),
+    ]);
+  }
+
+  function createResizeHandles() {
     return ['n', 'e', 's', 'w', 'ne', 'nw', 'se', 'sw']
-      .map(dir => `<span class="gpn-resize gpn-r-${dir}" data-gpn-resize="${dir}" aria-hidden="true"></span>`)
-      .join('');
+      .map(dir => el('span', {
+        className: `gpn-resize gpn-r-${dir}`,
+        'data-gpn-resize': dir,
+        'aria-hidden': 'true',
+      }));
+  }
+
+  function button(action, text, attrs = {}, children = [text]) {
+    const buttonAttrs = { type: 'button', ...attrs };
+    if (action) buttonAttrs['data-gpn-action'] = action;
+    return el('button', buttonAttrs, children);
+  }
+
+  function el(tag, attrs = {}, children = []) {
+    const node = document.createElement(tag);
+    Object.entries(attrs).forEach(([name, value]) => {
+      if (value === false || value === null || value === undefined) return;
+      if (name === 'className') {
+        node.className = value;
+      } else if (name === 'value') {
+        node.value = value;
+      } else {
+        node.setAttribute(name, String(value));
+      }
+    });
+    children.forEach(child => {
+      node.append(child instanceof Node ? child : document.createTextNode(String(child)));
+    });
+    return node;
   }
 
   function renderActiveOnly() {

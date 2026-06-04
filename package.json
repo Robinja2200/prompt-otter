@@ -1,0 +1,22 @@
+{
+  "name": "prompt-otter",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Navigate, search, and load all your prompts in long ChatGPT conversations.",
+  "license": "MIT",
+  "scripts": {
+    "build": "node scripts/build.js build",
+    "build:chrome": "node scripts/build.js build:chrome",
+    "build:firefox": "node scripts/build.js build:firefox",
+    "validate:release": "node scripts/build.js validate",
+    "lint:firefox": "NO_UPDATE_NOTIFIER=1 web-ext lint --source-dir dist/firefox",
+    "sign:firefox": "NO_UPDATE_NOTIFIER=1 web-ext sign --source-dir dist/firefox --artifacts-dir artifacts/firefox --channel=listed --amo-metadata amo-metadata.json --api-key=$AMO_JWT_ISSUER --api-secret=$AMO_JWT_SECRET",
+    "publish:chrome": "node scripts/chrome-web-store.js artifacts/prompt-otter-chrome-v$npm_package_version.zip"
+  },
+  "devDependencies": {
+    "web-ext": "10.3.0"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

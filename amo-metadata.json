@@ -1,0 +1,25 @@
+{
+  "summary": {
+    "en-US": "Navigate, search, and load prompts in long ChatGPT conversations."
+  },
+  "description": {
+    "en-US": "Prompt Otter highlights your prompts in ChatGPT conversations, builds a searchable prompt list, and helps you jump back to the right prompt in long chats. It runs locally in the browser and does not use analytics, tracking, accounts, API keys, or remote code."
+  },
+  "categories": [
+    "productivity"
+  ],
+  "homepage": {
+    "en-US": "https://github.com/Robinja2200/prompt-otter"
+  },
+  "support_url": {
+    "en-US": "https://github.com/Robinja2200/prompt-otter/issues"
+  },
+  "requires_payment": false,
+  "privacy_policy": {
+    "en-US": "Prompt Otter runs locally in your browser. It reads the ChatGPT page only to identify your prompts and build the navigation panel. It does not send prompts, chat content, browsing data, analytics, identifiers, or usage data to any server. The full privacy policy is available at https://github.com/Robinja2200/prompt-otter/blob/main/PRIVACY.md."
+  },
+  "version": {
+    "license": "MIT",
+    "approval_notes": "Prompt Otter is shipped as human-readable JavaScript with no bundling, minification, remote code, analytics, tracking, accounts, API keys, or external services. Source and generated artifacts are attached to the matching GitHub Release."
+  }
+}
