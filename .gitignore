@@ -18,3 +18,10 @@ desktop.ini
 *.zip
 *.rar
 *.7z
+
+# Node / release tooling
+node_modules/
+dist/
+artifacts/
+web-ext-artifacts/
+npm-debug.log*
