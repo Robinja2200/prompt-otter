@@ -2,19 +2,14 @@
 
 # Prompt Otter
 
-[Now live on Chrome Web Store: https://chromewebstore.google.com/detail/prompt-otter/bpnjpbkbmnjfcpiencjcinegcjfeiplc]
-
 **Prompt Otter** is a local userscript that makes long ChatGPT conversations easier to navigate. It highlights your prompts, builds a searchable prompt list, and can load prompts across long virtualized chats so you can jump back to the right part of a conversation faster.
 
-Prompt Otter is designed for ChatGPT on:
+Prompt Otter works for ChatGPT on:
 
 - `https://chatgpt.com/*`
 - `https://www.chatgpt.com/*`
 - `https://chat.openai.com/*`
 
-## Install from Greasy Fork (instructions below):
-
-https://greasyfork.org/en/scripts/580189-prompt-otter
 ## Features
 
 - Highlight your prompts inside ChatGPT conversations
@@ -31,14 +26,17 @@ https://greasyfork.org/en/scripts/580189-prompt-otter
 
 ## Installation
 
-### Recommended: Greasy Fork
+### Chrome Web Store version
+
+https://chromewebstore.google.com/detail/prompt-otter/bpnjpbkbmnjfcpiencjcinegcjfeiplc
+
+### Greasy Fork
 
 1. Install a userscript manager such as Tampermonkey, Violentmonkey, or Greasemonkey.
-2. Open the Prompt Otter page on Greasy Fork.
+2. Open the Prompt Otter page on Greasy Fork. (https://greasyfork.org/en/scripts/580189-prompt-otter)
 3. Click **Install this script**.
 4. Confirm the install in your userscript manager.
 5. Open or reload ChatGPT.
-
 
 ### Manual install from GitHub
 
@@ -51,20 +49,6 @@ https://greasyfork.org/en/scripts/580189-prompt-otter
 4. Your userscript manager should detect the script.
 5. Confirm installation.
 6. Open or reload ChatGPT.
-
-### Chrome Web Store version
-
-A Chrome Web Store version is planned/available as a Manifest V3 extension.
-
-The Chrome extension version uses the same local-only Prompt Otter logic, but it is packaged as a native Chrome extension instead of a userscript.
-
-Development package:
-
-- `chrome-extension/manifest.json`
-- `chrome-extension/content.js`
-- `chrome-extension/icons/`
-
-The Chrome extension does not use analytics, accounts, API keys, remote code, or external services.
 
 ## Usage
 
@@ -129,7 +113,7 @@ The prompt cache itself is kept in the page session and is rebuilt as ChatGPT lo
 
 - Prompt Otter can only detect prompts that ChatGPT has mounted in the page.
 - Long chats may require **Load all** before every prompt can be listed reliably.
-- ChatGPT UI changes can temporarily break selectors or scrolling behavior.
+- ChatGPT UI changes can temporarily break selectors or scrolling behavior. (**reporting this in github issues is appreciated**)
 - Very large chats may take time to scan, especially with **Safe load (slower)**.
 
 ## Troubleshooting
@@ -155,23 +139,6 @@ Run **Load all** first, then try again. If the issue happens in a very large con
 
 Stop the scan or wait for it to finish. **Load all** scrolls through the chat automatically, so very long conversations can temporarily feel busy.
 
-## Development
-
-Prompt Otter is a single-file userscript.
-
-- Main file: `prompt-otter.user.js`
-- No build step required
-- No external dependencies
-- No remote code loading
-- License: MIT
-
-For a release:
-
-1. Update the `@version` field in `prompt-otter.user.js`.
-2. Update `CHANGELOG.md`.
-3. Test on ChatGPT.
-4. Publish the updated script to GitHub and Greasy Fork.
-
 ## Support
 
 Report bugs or request features through GitHub Issues:
@@ -181,11 +148,9 @@ Report bugs or request features through GitHub Issues:
 Please include:
 
 - browser name and version
-- userscript manager name
+- your user script manager (extension store, tampermonkey...)
 - Prompt Otter version
-- whether the chat is short or long
-- whether **Load all** or **Safe load** was used
-- screenshots if helpful, with private chat content removed
+- screenshots
 
 ## License
 
