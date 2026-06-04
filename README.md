@@ -2,7 +2,7 @@
 
 # Prompt Otter
 
-[SOON ON CHROME WEB STORE AND FIREFOX ADD-ONS]
+[Now live on Chrome Web Store: https://chromewebstore.google.com/detail/prompt-otter/bpnjpbkbmnjfcpiencjcinegcjfeiplc]
 
 **Prompt Otter** is a local userscript that makes long ChatGPT conversations easier to navigate. It highlights your prompts, builds a searchable prompt list, and can load prompts across long virtualized chats so you can jump back to the right part of a conversation faster.
 
